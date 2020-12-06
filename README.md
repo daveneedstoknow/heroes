@@ -16,9 +16,11 @@ It's a lot less code than the angular one with essentially the same finctionalit
 Install GNUCOBOL  
 
 On Ubuntu
+
 sudo apt install open-cobol
 
 Compile & run with.
+
 cobc -x -free heroes.cob -o ./build/heroes && ./build/heroes
 
 ## DID I LEARN ANYTHING?
