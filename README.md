@@ -1,15 +1,18 @@
 # heroes
 Cobol heroes 
 
-WHAT?
+## WHAT?
+
 Its a version of the Angular tutorial https://angular.io/tutorial Heroes application using COBOL & tech from the 80's
 
-WHY?
+## WHY?
+
 My good friend Dave Farley was looking at if new technologies have really made the developers job any easier.
 I said I'd do a COBOL terminal based one just for giggles.
 It's a lot less code than the angular one with essentially the same finctionality.
 
-HOW DO I RUN this?
+## HOW DO I RUN this?
+
 Install GNUCOBOL  
 
 On Ubuntu
