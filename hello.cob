@@ -12,6 +12,7 @@
                88 PF-KEY-2 value 1002.
                88 PF-KEY-3 value 1003.
                88 PF-KEY-4 value 1004.
+               88 PF-KEY-5 value 1005.
                88 PF-KEY-8 value 1008.
                88 PF-KEY-10 value 1010.
                88 PF-KEY-12 value 1012.
@@ -48,11 +49,16 @@
            
            01 heroNumber PIC 99.
            01 lineNumber PIC 99.
+           01 detailPanelLineNumber PIC 99.
 
            01 selectedHeroNumber PIC 99 VALUE 1.
            01 background-colour PIC 9.
            01 col-highlight pic 9 value 4.
            01 col-normal pic 9 value 0.
+
+           01 hero-edit.
+               05 hero-name pic x(20).
+
        SCREEN SECTION.
               
            01 HEADINGS.
@@ -62,8 +68,8 @@
                05 VALUE "NAME" COL 25.
                
            
-           01 DATA-ENTRY.
-               05 VALUE "F1 EXIT, F2 PREV, F3 NEXT" LINE NUMBER lineNumber COL 1.
+           01 SC-FUNCTION-KEYS.
+               05 VALUE "F1 EXIT, F2 PREV, F3 NEXT, F5 EDIT" LINE NUMBER lineNumber COL 1.
                05 FILLER PIC X TO WS-ACCEPT-FNC-KEY  LINE NUMBER PLUS 1 COL 1 .
 
            01 SC-DASHBOARD-ROW.
@@ -73,8 +79,8 @@
                    BACKGROUND-COLOR background-colour.
 
            01 SC-DETAILS-PANEL.
-               10  VALUE "My hero is " col 1 line number lineNumber.
-               10  hero-name PIC X(20).
+               10  VALUE "My hero is " col 1 line number detailPanelLineNumber.
+               10  hero-name using hero-name of hero-edit PIC X(20).
               
        PROCEDURE DIVISION.
            DISPLAY HEADINGS.
@@ -106,13 +112,15 @@
 
        SHOW-DETAILS.
            add 2 to lineNumber.
-           MOVE corresponding hero(selectedHeroNumber) TO SC-DETAILS-PANEL.
+           move lineNumber to detailPanelLineNumber.
+           MOVE corresponding hero(selectedHeroNumber) TO hero-edit.
            DISPLAY SC-DETAILS-PANEL.
 
        accept-it.
            
            ADD 2 to lineNumber.
-           ACCEPT DATA-ENTRY .
+           ACCEPT SC-FUNCTION-KEYS
+           .
            evaluate TRUE
                WHEN PF-KEY-3
                    IF selectedHeroNumber < heroCount  
@@ -122,9 +130,13 @@
                    IF selectedHeroNumber > 1
                        subtract 1 FROM selectedHeroNumber
                    end-if
+               WHEN PF-KEY-5
+                   perform edit
            end-evaluate.
 
            perform display-it. 
 
-           
+       edit.
+           ACCEPT SC-DETAILS-PANEL.
+           move corresponding hero-edit to hero(selectedHeroNumber).
            
