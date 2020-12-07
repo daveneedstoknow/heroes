@@ -19,6 +19,8 @@ On Ubuntu
 
 sudo apt install open-cobol
 
+or excellent page here on installing the latest version of GNUCOBOL https://learningcobol.wordpress.com/2018/05/04/how-to-install-gnucobol-2-2-0-on-ubuntu/
+
 ### Compile & run with.
 
 cobc -x -free heroes.cob -o ./build/heroes && ./build/heroes
