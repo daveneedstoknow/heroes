@@ -20,23 +20,26 @@
                05 FILLER.
                    10 pic 99 value 01.
                    10 pic x(20) value "Superman".
+                   10 PIC X(100) value "My spidey senses are tingling.".
 
                    10 pic 99 value 02.
                    10 pic x(20) value "Batman".
+                   10 PIC X(100) VALUE "i am the vengeance, I am the night, I am BATMAN!".
 
                    10 pic 99 value 11.
                    10 pic x(20) value "Wonder Woman".
+                   10 PIC X(100) VALUE "Make a hawk a dove, Stop a war with love, Make a liar tell the truth.".
 
                    10 pic 99 value 03.
                    10 pic x(20) value "Spiderman".
+                   10 PIC X(100) VALUE "With great power, comes great responsibility.".
            
            01 WS-HERO-DATA redefines WS-DEFAULT-HEROES.
                05 WS-HERO occurs 4 times.
-                   10 hero-id PIC 99.
-                   10 hero-name PIC X(20).
+                   COPY HERO.
 
            01 WS-HERO-EDIT.
-               05 hero-name pic x(20).
+               COPY HERO.
            
            01 WS-HERO-NUMBER PIC 99.
            01 WS-SELECTED-HERO-NUMBER PIC 99 VALUE 1.
@@ -71,9 +74,15 @@
                    BACKGROUND-COLOR ROW-BACKGROUND-COLOUR.
 
            01 SC-DETAILS-PANEL.
-               10  VALUE "My hero is " 
+               10  VALUE "My hero is  :" 
                    COL 1 LINE NUMBER WS-DETAIL-PANEL-LINE-NUM.
-               10  hero-name USING hero-name OF WS-HERO-EDIT PIC X(20).
+               10  hero-name COL 15 USING hero-name OF WS-HERO-EDIT PIC X(20).
+
+
+               10  VALUE "Catchphrase :" COL 1 LINE NUMBER PLUS 1.
+               10  hero-catchphrase 
+                   COL 15
+                   USING hero-catchphrase OF WS-HERO-EDIT PIC X(100).
               
        PROCEDURE DIVISION.
            PERFORM COMMAND-POLL UNTIL PF-KEY-1-EXIT.
@@ -127,7 +136,7 @@
            
 
        ACCEPT-COMMAND. 
-           ADD 2 TO WS-NEXT-DISPLAY-LINE-NUM.
+           ADD 5 TO WS-NEXT-DISPLAY-LINE-NUM.
            ACCEPT SC-FUNCTION-KEYS.
 
        HANDLE-COMMAND.
