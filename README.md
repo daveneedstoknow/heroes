@@ -15,11 +15,7 @@ It's a lot less code than the angular one with essentially the same finctionalit
 
 ### Install GNUCOBOL  
 
-On Ubuntu
-
-sudo apt install open-cobol
-
-or excellent page here on installing the latest version of GNUCOBOL https://learningcobol.wordpress.com/2018/05/04/how-to-install-gnucobol-2-2-0-on-ubuntu/
+excellent page here on installing the latest version of GNUCOBOL https://learningcobol.wordpress.com/2018/05/04/how-to-install-gnucobol-2-2-0-on-ubuntu/
 
 ### Compile & run with.
 
